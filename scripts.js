@@ -1,4 +1,4 @@
-/*
+ /*
 Twitter/X Fast Reply Deleter - Smooth Scroll Version (2025)
 Deletes 1 reply → Scrolls down 1 post smoothly
 No aggressive scrolling - natural flow
@@ -38,7 +38,7 @@ const scrollOnePost = async () => {
     behavior: 'smooth'
   });
   
-  await wait(600); // Wait for smooth scroll to complete
+  await wait(1200); // Wait for smooth scroll to complete
 };
 
 // Completely remove post from DOM
@@ -93,7 +93,7 @@ const deleteAllReplies = async () => {
   let totalDeleted = 0;
   let attempts = 0;
   let consecutiveNoDelete = 0;
-  const maxAttempts = 500;
+  const maxAttempts = 2850;
   const maxNoDelete = 20;
   
   while (attempts < maxAttempts && consecutiveNoDelete < maxNoDelete) {
@@ -124,7 +124,7 @@ const deleteAllReplies = async () => {
         if (!moreButton || moreButton.offsetParent === null) {
           console.log('⚠️ No menu button, removing tweet');
           removePost(tweet);
-          await wait(300);
+          await wait(600);
           
           // Scroll down after removing
           await scrollOnePost();
@@ -133,14 +133,14 @@ const deleteAllReplies = async () => {
         
         // Click more menu
         moreButton.click();
-        await wait(300);
+        await wait(600);
         
         // Find delete option
         const deleteOption = findDeleteOption();
         if (!deleteOption) {
           console.log('⚠️ No delete option, removing tweet');
           document.body.click();
-          await wait(100);
+          await wait(200);
           removePost(tweet);
           consecutiveNoDelete++;
           
@@ -151,7 +151,7 @@ const deleteAllReplies = async () => {
         
         // Click delete
         deleteOption.click();
-        await wait(300);
+        await wait(600);
         
         // Find and click confirm
         let confirmBtn = document.querySelector('[data-testid="confirmationSheetConfirm"]');
@@ -172,7 +172,7 @@ const deleteAllReplies = async () => {
           totalDeleted++;
           consecutiveNoDelete = 0;
           console.log(`✅ Deleted reply #${totalDeleted}`);
-          await wait(500);
+          await wait(1000);
           
           // Remove the post completely
           removePost(tweet);
@@ -196,11 +196,11 @@ const deleteAllReplies = async () => {
           removePost(tweet);
           await scrollOnePost();
         } catch {}
-        await wait(300);
+        await wait(600);
       }
       
       // Quick delay
-      const delay = 400 + Math.random() * 300;
+      const delay = 800 + Math.random() * 600;
       await wait(delay);
       
       // Progress
@@ -215,7 +215,7 @@ const deleteAllReplies = async () => {
       
     } catch (error) {
       console.error(`Error at attempt #${attempts}:`, error.message);
-      await wait(1000);
+      await wait(2000);
     }
   }
   
@@ -235,4 +235,4 @@ const deleteAllReplies = async () => {
 // Start after 2 seconds
 setTimeout(() => {
   deleteAllReplies().catch(e => console.error('Fatal error:', e));
-}, 2000);
+}, 4000);
