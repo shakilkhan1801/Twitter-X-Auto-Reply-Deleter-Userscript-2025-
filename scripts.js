@@ -2,6 +2,7 @@
 Twitter/X Fast Reply Deleter - Smooth Scroll Version (2025)
 Deletes 1 reply → Scrolls down 1 post smoothly
 No aggressive scrolling - natural flow
+https://github.com/shakilkhan1801/Twitter-X-Auto-Reply-Deleter-Userscript-2025-.git
 */
 
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
